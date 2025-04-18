@@ -80,7 +80,7 @@ class Detector():
                             objects[object_idx_by_class_id[class_id][object_idx_1]] = None
         objects = [x for x in objects if x is not None]  # remove the objects we filtered out
 
-        return objects, image
+        return objects
 
 
     # removes boxes from detected object set A (main set) that are not in detected object set B (check set)

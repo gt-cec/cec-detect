@@ -23,6 +23,7 @@ import cec_detect
 
 detector = cec_detect.Detector()
 
-image = ...  # RGB numpy array
+image = np.random((512, 512))  # RGB numpy array
 classes = ["person", "dog", "cat"]  # classes to detect
-detector.
+objects = detector.detect(image, classes, threshold=0.1)  # run the detection, threshold indicates the confidence threshold
+```
