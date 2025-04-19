@@ -10,19 +10,19 @@ class Detector():
     def __init__(self):
         # set device to cuda if cuda is available
         if torch.cuda.is_available():
-            device = "cuda"
+            self.device = "cuda"
             print("Using CUDA")
         # otherwise check if on macos
         elif sys.platform == "darwin":
-            device = "mps"
+            self.device = "mps"
             print("Using MPS")
         else:
-            device = "cpu"
+            self.device = "cpu"
             print("Using CPU")
 
         # if you get an undefined symbol:ffi_type_uint32, version LIBFFI_BASE_7.0 error, set the env var LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7
         self.processor = Owlv2Processor.from_pretrained("google/owlv2-base-patch16-ensemble")
-        self.model = Owlv2ForObjectDetection.from_pretrained("google/owlv2-base-patch16-ensemble").to(torch.device(device))
+        self.model = Owlv2ForObjectDetection.from_pretrained("google/owlv2-base-patch16-ensemble").to(torch.device(self.device))
 
     # main detection function
     def detect(self, image, classes, threshold=0.1):
