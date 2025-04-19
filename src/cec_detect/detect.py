@@ -5,6 +5,7 @@ import numpy as np
 from transformers import Owlv2Processor, Owlv2ForObjectDetection
 import utils
 import sys
+import os
 
 class Detector():
     def __init__(self):
@@ -40,7 +41,7 @@ class Detector():
             # this should work now
             # model = build_sam2('<config-name>', '<checkpoint-path>')
 
-            sam2_checkpoint = "./segmentation/sam2.1_hiera_large.pt"
+            sam2_checkpoint = os.path.dirname(os.path.abspath(__file__)) + "/sam2.1_hiera_large.pt"
             model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
             sam2_model = build_sam2(model_cfg, sam2_checkpoint, device=self.device)
             self.predictor = SAM2ImagePredictor(sam2_model)
