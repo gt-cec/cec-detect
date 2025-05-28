@@ -45,6 +45,8 @@ class Detector():
             model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
             sam2_model = build_sam2(model_cfg, sam2_checkpoint, device=self.device)
             self.predictor = SAM2ImagePredictor(sam2_model)
+        except FileNotFoundError as e:
+            print("[CEC Detect] WARNING: Could not find SAM2 weights or config, place sam2.1_hiera_large.pt in the cec_detect/src folder, and sam2.1_hiera_l.yaml in cec_detect/configs/sam2.1/")
         except ModuleNotFoundError as e:
             print("[CEC Detect] WARNING: SAM2 is not installed, do not expect to use it. Message:", e)
             self.predictor = None
